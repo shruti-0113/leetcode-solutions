@@ -10,16 +10,25 @@ public:
             }
         }
         vector<int>ans2;
-        map<int,int>d;
-        for(auto it: ans){
-            d[it]++;
-        }
-        for(auto it1: d){
-            ans2.push_back(it1.first);
-        }
-        return ans2;
-        
+        // map<int,int>d;
+        // for(auto it: ans){
+        //     d[it]++;
+        // }
 
+        // for(auto it1: d){
+        //     ans2.push_back(it1.first);
+        // }
+        // return ans2;
+        set<int>s;
+        for(int i =0;i<ans.size();i++){
+
+        s.insert(ans[i]);
+        }
+        for(auto it: s){
+            ans2.push_back(it);
+        }
+        
+        return ans2;
     }
     
 
