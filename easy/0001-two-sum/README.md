@@ -1,0 +1,9 @@
+# 1. Two Sum
+
+[View problem on LeetCode](https://leetcode.com/problems/two-sum/)
+
+**Difficulty:** Easy
+
+**Tags:** Array, Hash Table
+
+Solution code is stored next to this file as `solution.<ext>` — one file per language (`solution.py`, `solution.cpp`, `solution.java`).
