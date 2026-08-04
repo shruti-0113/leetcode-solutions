@@ -4,7 +4,7 @@ public:
         vector<int>arr;
         sort(nums.begin(),nums.end());
         int j=0;
-        for(int i=nums[0]; i<=nums[nums.size()-1]; i++){
+        for(int i=nums[0]; i<= nums[nums.size()-1]; i++){
             if(i != nums[j]){
                 arr.push_back(i);
             } else {
