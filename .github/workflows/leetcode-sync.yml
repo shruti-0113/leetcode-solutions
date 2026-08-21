@@ -1,0 +1,46 @@
+name: Sync LeetCode
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "30 2 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: leetcode-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync accepted submissions from leetcode.com
+        uses: serephus/leech@v2
+        with:
+          github-token: ${{ github.token }}
+          leetcode-session: ${{ secrets.LEETCODE_SESSION }}
+          leetcode-csrf-token: ${{ secrets.LEETCODE_CSRF_TOKEN }}
+          config: |
+            destination: "."
+            filters:
+              status: accepted
+              languages: [python3, cpp, java]
+            commit:
+              prefix: "leetcode:"
+              message: "{{ question.frontend_id }}. {{ question.title }} ({{ submission.lang }})"
+            files:
+              - filename: "{{ question.difficulty | lower }}/{{ question.frontend_id | pad(4) }}-{{ question.title_slug }}/README.md"
+                content: |-
+                  # {{ question.frontend_id }}. {{ question.title }}
+
+                  [View problem on LeetCode]({{ question.url }})
+
+                  **Difficulty:** {{ question.difficulty }}
+
+                  **Tags:** {{ question.tags | join(", ") }}
+
+                  Solution code is stored next to this file as `solution.<ext>` — one file per language (`solution.py`, `solution.cpp`, `solution.java`).
+              - filename: "{{ question.difficulty | lower }}/{{ question.frontend_id | pad(4) }}-{{ question.title_slug }}/solution.{{ submission.lang_ext }}"
+                content: "{{ submission.code }}"
