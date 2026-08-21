@@ -23,7 +23,7 @@ jobs:
           leetcode-session: ${{ secrets.LEETCODE_SESSION }}
           leetcode-csrf-token: ${{ secrets.LEETCODE_CSRF_TOKEN }}
           config: |
-            destination: "."
+            destination: ""
             filters:
               status: accepted
               languages: [python3, cpp, java]
