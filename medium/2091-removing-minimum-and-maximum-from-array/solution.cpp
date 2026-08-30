@@ -2,7 +2,7 @@
 
 class Solution {
 public:
-    int minimumDeletions(std::vector<int>& nums) {
+    int minimumDeletions(vector<int>& nums) {
         int n = nums.size();
         int mini = 0, maxi = 0;
 
